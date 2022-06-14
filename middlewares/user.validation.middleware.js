@@ -4,7 +4,6 @@ const createUserValid = (req, res, next) => {
   // TODO: Implement validatior for user entity during creation
 
   const userKeys = Object.keys(user).slice(1, 6);
-  console.log(userKeys);
 
   const errorMessage = {
     error: true,

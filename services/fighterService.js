@@ -4,6 +4,7 @@ class FighterService {
   // TODO: Implement methods to work with fighters
 
   addFighter(req, res) {
+    req.body.name = req.body.name.toLowerCase();
     if (this.search({ name: req.body.name })) {
       throw Error("Fighter with this name already exist!!");
     }
@@ -22,7 +23,7 @@ class FighterService {
   getAllFighters() {
     const users = FighterRepository.getAll();
     if (users.length === 0) {
-      throw Error("Database is empty!");
+      throw Error("Fighters list is empty!");
     } else {
       return users;
     }

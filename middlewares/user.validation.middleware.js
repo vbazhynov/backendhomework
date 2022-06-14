@@ -25,8 +25,11 @@ const createUserValid = (req, res, next) => {
   } else if (!req.body.email.endsWith("@gmail.com")) {
     errorMessage.message = "Email must be registered only on @gmail.com ";
     res.status(400).send(errorMessage);
-  } else if (!req.body.phoneNumber.startsWith("+380")) {
-    errorMessage.message = 'Phone number must starts with "+380" ';
+  } else if (
+    !req.body.phoneNumber.startsWith("+380") ||
+    req.body.phoneNumber.length !== 13
+  ) {
+    errorMessage.message = 'Phone number format should be "+380ххххххххх" ';
     res.status(400).send(errorMessage);
   } else if (req.body.password.length < 3) {
     errorMessage.message = "Password should be longer than 3 symbols";
@@ -44,7 +47,7 @@ const updateUserValid = (req, res, next) => {
   };
 
   if (Object.keys(req.body).length == 0) {
-    errorMessage.message = "Request data is empty";
+    errorMessage.message = "Nothing to change";
     res.status(400).send(errorMessage);
   } else {
     next();

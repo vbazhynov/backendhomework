@@ -37,6 +37,17 @@ const createFighterValid = (req, res, next) => {
 
 const updateFighterValid = (req, res, next) => {
   // TODO: Implement validatior for fighter entity during update
+  const errorMessage = {
+    error: true,
+    message: "",
+  };
+
+  if (Object.keys(req.body).length == 0) {
+    errorMessage.message = "Nothing to change";
+    res.status(400).send(errorMessage);
+  } else {
+    next();
+  }
   next();
 };
 
